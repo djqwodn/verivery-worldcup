@@ -113,7 +113,6 @@ let currentIndex = 0;
 
 function renderMatch() {
   if (round.length === 1) {
-    rankings.unshift(round[0]);
     showFinalResults();
     return;
   }
