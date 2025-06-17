@@ -158,7 +158,10 @@ function showFinalResults() {
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
 
-  const top5 = [round[0], ...rankings.slice(0, 4)];
+const first = round[0];
+const filtered = rankings.filter(video => video.id !== first.id);
+const top5 = [first, ...filtered.slice(0, 4)];
+
   top5.forEach((video, idx) => {
     const card = document.createElement("div");
     card.className = "result-card";
