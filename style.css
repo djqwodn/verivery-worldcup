@@ -103,8 +103,8 @@ h1 {
 
 /* 최종 결과 카드 스타일 */
 .result-card {
-  background: #8e2469; /* 자주색 (Pantone 7649 CP) */
-  color: white;
+  background: #e9e4ee; 
+  color:#8e2469;
   padding: 14px;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -121,8 +121,8 @@ h1 {
 
 /* 1위 전용 스타일 오버라이드 */
 .result-card.top-1st {
-  background: #e9e4ee; /* 연보라 (Pantone 663 UP에 가까운 RGB) */
-  color: #8e2469;
-  border: 2px solid #8e2469;
+  background: #8e2469; 
+  color: #e9e4ee;
+  border: 2px solid #e9e4ee;
   font-weight: bold;
 }
