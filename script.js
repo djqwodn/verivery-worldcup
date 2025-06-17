@@ -192,7 +192,11 @@ document.getElementById("shareBtn").onclick = () => {
 
 document.getElementById("saveImageBtn").onclick = () => {
   const resultSection = document.getElementById("results");
-  html2canvas(resultSection).then(canvas => {
+  html2canvas(resultSection, {
+    useCORS: true,
+    allowTaint: false,
+    backgroundColor: null // 투명 배경도 가능
+  }).then(canvas => {
     const link = document.createElement("a");
     link.download = 'verivery_ranking.png';
     link.href = canvas.toDataURL();
