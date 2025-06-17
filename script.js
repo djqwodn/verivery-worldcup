@@ -53,7 +53,15 @@ const videos = [
   { name: "SMILE WITH WOU", id: "RMV775MSd3c" }
 ];
 
-let round = [...videos];
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+let round = shuffle([...videos]);
 let nextRound = [];
 let rankings = [];
 
