@@ -145,13 +145,13 @@ function showFinalResults() {
 
   rankings.forEach((video, idx) => {
     const li = document.createElement("li");
-    li.textContent = `${idx + 2}위: ${video.name}`;
+    li.textContent = video.name;
     rankingOl.appendChild(li);
   });
 
   const first = round[0];
   const li = document.createElement("li");
-  li.textContent = `1위: ${first.name}`;
+  li.textContent = first.name;
   li.style.fontWeight = "bold";
   li.style.color = "#8e2469";
   rankingOl.insertBefore(li, rankingOl.firstChild);
