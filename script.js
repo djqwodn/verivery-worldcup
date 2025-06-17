@@ -155,12 +155,17 @@ function showFinalResults() {
   resultsDiv.style.display = "block";
   });
 
+ function showFinalResults() {
+  roundInfo.textContent = "최종 결과";
+  matchDiv.style.display = "none";
+  resultsDiv.style.display = "block";
+
   // 자동 top 5 카드 생성
   const topResults = document.getElementById("top-results");
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
 
-  const top5 = [first, ...rankings.slice(0, 4)];
+  const top5 = [round[0], ...rankings.slice(0, 4)];
   top5.forEach((video, idx) => {
     const card = document.createElement("div");
     card.className = "result-card";
