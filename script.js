@@ -143,18 +143,18 @@ function showFinalResults() {
   resultsDiv.style.display = "block";
   rankingOl.innerHTML = "";
 
+  const first = round[0];
+  const firstLi = document.createElement("li");
+  firstLi.textContent = `1위. ${first.name}`;
+  firstLi.style.fontWeight = "bold";
+  firstLi.style.color = "#8e2469";
+  rankingOl.appendChild(firstLi);
+
   rankings.forEach((video, idx) => {
     const li = document.createElement("li");
-    li.textContent = video.name;
+    li.textContent = `${idx + 2}위. ${video.name}`;
     rankingOl.appendChild(li);
   });
-
-  const first = round[0];
-  const li = document.createElement("li");
-  li.textContent =vfirst.name;
-  li.style.fontWeight = "bold";
-  li.style.color = "#8e2469";
-  rankingOl.insertBefore(li, rankingOl.firstChild);
 }
 
 renderMatch();
