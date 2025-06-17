@@ -149,12 +149,6 @@ function renderMatch() {
   matchDiv.appendChild(card2);
 }
 
-function showFinalResults() {
-  roundInfo.textContent = "최종 결과";
-  matchDiv.style.display = "none";
-  resultsDiv.style.display = "block";
-  });
-
  function showFinalResults() {
   roundInfo.textContent = "최종 결과";
   matchDiv.style.display = "none";
