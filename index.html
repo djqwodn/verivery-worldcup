@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>베리베리 최애곡 월드컵</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>베리베리 최애곡 월드컵</h1>
+  <div id="round-info"></div>
+  <div id="match"></div>
+
+  <div id="results">
+    <h2>최종 순위</h2>
+    <ul id="ranking"></ul>
+
+    <div id="top-results" class="top-results">
+      <h2>🏆 최종 TOP 5</h2>
+      <div class="top-list"></div>
+    </div>
+
+    <div class="result-actions">
+      <button id="shareBtn">🔗 공유하기</button>
+      <button id="saveImageBtn">🖼 이미지 저장</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>by @삶이<br>'듣기'를 누르면 해당 영상 링크로 이동됩니다💜</p>
+  </footer>
+
+  <!-- 이미지 저장용 라이브러리 -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
