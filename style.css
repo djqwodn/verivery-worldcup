@@ -101,37 +101,28 @@ h1 {
   color: #666;
 }
 
-/* 결과 카드 스타일 */
-.top-results {
-  margin-top: 40px;
+/* 최종 결과 카드 스타일 */
+.result-card {
+  background: #8e2469; /* 자주색 (Pantone 7649 CP) */
+  color: white;
+  padding: 14px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin: 14px auto;
+  width: 320px;
   text-align: center;
 }
-.top-results h2 {
-  color: #8e2469;
-  margin-bottom: 16px;
-}
-.top-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-.result-card {
-  width: 280px;
-  background: #781f49;
-  color: white;
-  padding: 16px;
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
+
 .result-card img {
   width: 100%;
   border-radius: 12px;
   margin-bottom: 10px;
 }
+
+/* 1위 전용 스타일 오버라이드 */
 .result-card.top-1st {
-  background: #eee9f0;
-  color: #781f49;
-  border: 2px solid #781f49;
+  background: #e9e4ee; /* 연보라 (Pantone 663 UP에 가까운 RGB) */
+  color: #8e2469;
+  border: 2px solid #8e2469;
   font-weight: bold;
 }
