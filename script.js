@@ -149,12 +149,11 @@ function renderMatch() {
   matchDiv.appendChild(card2);
 }
 
- function showFinalResults() {
+function showFinalResults() {
   roundInfo.textContent = "최종 결과";
   matchDiv.style.display = "none";
   resultsDiv.style.display = "block";
 
-  // 자동 top 5 카드 생성
   const topResults = document.getElementById("top-results");
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
@@ -177,6 +176,7 @@ function renderMatch() {
     topList.appendChild(card);
   });
 }
+
 
 document.getElementById("shareBtn").onclick = () => {
   const firstPlace = round[0].name;
