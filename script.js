@@ -68,7 +68,6 @@ let rankings = [];
 const roundInfo = document.getElementById("round-info");
 const matchDiv = document.getElementById("match");
 const resultsDiv = document.getElementById("results");
-const rankingOl = document.getElementById("ranking");
 
 function getRoundLabel(len) {
   if (len === 2) return "결승";
@@ -154,19 +153,6 @@ function showFinalResults() {
   roundInfo.textContent = "최종 결과";
   matchDiv.style.display = "none";
   resultsDiv.style.display = "block";
-  rankingOl.innerHTML = "";
-
-  const first = round[0];
-  const firstLi = document.createElement("li");
-  firstLi.textContent = `1위. ${first.name}`;
-  firstLi.style.fontWeight = "bold";
-  firstLi.style.color = "#8e2469";
-  rankingOl.appendChild(firstLi);
-
-  rankings.forEach((video, idx) => {
-    const li = document.createElement("li");
-    li.textContent = `${idx + 2}위. ${video.name}`;
-    rankingOl.appendChild(li);
   });
 
   // 자동 top 5 카드 생성
