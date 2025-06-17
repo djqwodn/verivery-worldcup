@@ -82,3 +82,32 @@ h1 {
   gap: 6px;
   margin-top: 8px;
 }
+
+// 공유 기능
+document.getElementById("shareBtn").onclick = () => {
+  const firstPlace = round[0].name;
+  const shareUrl = "https://djqwodn.github.io/verivery-worldcup/";
+  const text = `내가 뽑은 베리베리 최애곡 1위는 "${firstPlace}" 💜 지금 바로 월드컵 해보기!`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: "베리베리 최애곡 월드컵",
+      text,
+      url: shareUrl,
+    });
+  } else {
+    alert("모바일에서 공유 기능을 사용할 수 있어요 📱\n\n링크: " + shareUrl);
+  }
+};
+
+// 이미지 저장 기능
+document.getElementById("saveImageBtn").onclick = () => {
+  const resultSection = document.getElementById("results");
+
+  html2canvas(resultSection).then(canvas => {
+    const link = document.createElement("a");
+    link.download = 'verivery_ranking.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+};
