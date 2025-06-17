@@ -171,4 +171,22 @@ function showFinalResults() {
   });
 }
 
+.result-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.result-actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #8e2469;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
 renderMatch();
