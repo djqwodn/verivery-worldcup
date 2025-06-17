@@ -82,7 +82,7 @@ function createThumbnail(video, onClick) {
   const link = document.createElement("a");
   link.href = `https://www.youtube.com/watch?v=${video.id}`;
   link.target = "_blank";
-  link.textContent = "유튜브에서 보기";
+  link.textContent = "듣기";
 
   const playBtn = document.createElement("button");
   playBtn.textContent = "▶ 선택"; 
