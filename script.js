@@ -98,8 +98,14 @@ function createThumbnail(video, onClick) {
 
   wrapper.appendChild(thumbnail);
   wrapper.appendChild(title);
-  wrapper.appendChild(link);
-  wrapper.appendChild(playBtn);
+
+  const controls = document.createElement("div");
+  controls.className = "controls-wrap";
+  controls.appendChild(link);
+  controls.appendChild(playBtn);
+
+  wrapper.appendChild(controls);
+
 
   return wrapper;
 }
