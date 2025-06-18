@@ -63,6 +63,7 @@ function shuffle(array) {
 let round = shuffle([...videos]);
 let nextRound = [];
 let rankings = [];
+let semiFinalists = [];
 
 const roundInfo = document.getElementById("round-info");
 const matchDiv = document.getElementById("match");
@@ -115,6 +116,10 @@ function renderMatch() {
     return;
   }
 
+  if (round.length === 3 && semiFinalists.length === 0) {
+    semiFinalists = [...round]; // 3강 기억
+  }
+
   if (currentIndex >= round.length - 1) {
     round = nextRound;
     nextRound = [];
@@ -156,15 +161,12 @@ function showFinalResults() {
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
 
-  const first = round[0];         // 결승 승자
+  const first = round[0]; // 결승 승자
   const second = rankings.at(-1); // 결승 패자
 
-  // 마지막 3강에서의 참가자 찾기
-  const lastSix = rankings.slice(-2); // 결승 진출 못한 1명 + 결승 패자
-  const threeStrong = [first, ...lastSix]; // 3강 참가자 3명
-
-  // 3강 중 결승에 올라가지 못한 1명 찾기 = 3위
-  let third = threeStrong.find(v => v.id !== first.id && v.id !== second.id);
+  const third = semiFinalists.find(
+    (v) => v.id !== first.id && v.id !== second.id
+  );
 
   const top3 = [first, second, third];
 
@@ -201,10 +203,10 @@ document.getElementById("shareBtn").onclick = () => {
 document.getElementById("saveImageBtn").onclick = () => {
   const resultSection = document.getElementById("results");
   html2canvas(resultSection, {
-    backgroundColor: "#ffffff", // 흰색 배경 설정
+    backgroundColor: "#ffffff",
     useCORS: true,
     allowTaint: false,
-  }).then(canvas => {
+  }).then((canvas) => {
     const link = document.createElement("a");
     link.download = 'verivery_ranking.png';
     link.href = canvas.toDataURL();
@@ -213,3 +215,4 @@ document.getElementById("saveImageBtn").onclick = () => {
 };
 
 renderMatch();
+
