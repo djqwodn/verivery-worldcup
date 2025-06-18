@@ -157,19 +157,14 @@ function showFinalResults() {
   topList.innerHTML = "";
 
   const first = round[0];         // 결승 승자
-  const second = rankings.at(-1); // 결승 패자 (항상 마지막에 push됨)
+  const second = rankings.at(-1); // 결승 패자
 
-  // 준결승에서 탈락한 두 곡 찾기
-  const semifinalLosers = rankings.slice(-3, -1); // 마지막 두 경기 중 결승 전 경기 패자들
+  // 마지막 3강에서의 참가자 찾기
+  const lastSix = rankings.slice(-2); // 결승 진출 못한 1명 + 결승 패자
+  const threeStrong = [first, ...lastSix]; // 3강 참가자 3명
 
-  // 결승 진출자 2명을 제외한 준결승 탈락자 중 하나를 3위로
-  let third = null;
-  for (const video of semifinalLosers) {
-    if (video.id !== second.id) { // 결승 패자 제외
-      third = video;
-      break;
-    }
-  }
+  // 3강 중 결승에 올라가지 못한 1명 찾기 = 3위
+  let third = threeStrong.find(v => v.id !== first.id && v.id !== second.id);
 
   const top3 = [first, second, third];
 
