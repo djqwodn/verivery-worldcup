@@ -208,7 +208,7 @@ document.getElementById("saveImageBtn").onclick = () => {
   html2canvas(resultSection, {
     useCORS: true,
     allowTaint: false,
-    backgroundColor: null
+    backgroundColor: "#ffffff"
   }).then(canvas => {
     const link = document.createElement("a");
     link.download = 'verivery_ranking.png';
