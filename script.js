@@ -157,15 +157,19 @@ function showFinalResults() {
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
 
-  const winner = round[0];     // 1위
-  const runnerUp = rankings[0]; // 2위: 탈락 첫번째
-  const third = rankings[1];    // 3위: 탈락 두번째
+  const top1 = round[0];
+  const seen = new Set();
+  const topRest = [];
+  for (const v of rankings) {
+    if (!seen.has(v.id) && v.id !== top1.id) {
+      seen.add(v.id);
+      topRest.push(v);
+    }
+    if (topRest.length === 2) break;
+  }
+  const top3 = [top1, ...topRest];
 
-  const topVideos = [winner];
-  if (runnerUp) topVideos.push(runnerUp);
-  if (third) topVideos.push(third);
-
-  topVideos.forEach((video, idx) => {
+  top3.forEach((video, idx) => {
     const card = document.createElement("div");
     card.className = "result-card";
     if (idx === 0) card.classList.add("top-1st");
@@ -182,8 +186,6 @@ function showFinalResults() {
     topList.appendChild(card);
   });
 }
-
-
 
 renderMatch();
 
@@ -204,7 +206,7 @@ document.getElementById("saveImageBtn").onclick = () => {
   html2canvas(resultSection, {
     useCORS: true,
     allowTaint: false,
-    backgroundColor: "#ffffff"
+    backgroundColor: null
   }).then(canvas => {
     const link = document.createElement("a");
     link.download = 'verivery_ranking.png';
@@ -212,4 +214,3 @@ document.getElementById("saveImageBtn").onclick = () => {
     link.click();
   });
 };
-
