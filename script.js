@@ -158,37 +158,36 @@ function showFinalResults() {
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
 
-const top1 = round[0];
-
-// rankings에서 중복 제거하여 상위 2개만 추출
-const seen = new Set();
-const topRest = [];
-for (const v of rankings) {
-  if (!seen.has(v.id) && v.id !== top1.id) {
-    seen.add(v.id);
-    topRest.push(v);
+  const top1 = round[0];
+  const seen = new Set();
+  const topRest = [];
+  for (const v of rankings) {
+    if (!seen.has(v.id) && v.id !== top1.id) {
+      seen.add(v.id);
+      topRest.push(v);
+    }
+    if (topRest.length === 2) break;
   }
-  if (topRest.length === 2) break;
-}
 
-const top3 = [top1, ...topRest];
+  const top3 = [top1, ...topRest];
 
-top3.forEach((video, idx) => {
-  const card = document.createElement("div");
-  card.className = "result-card";
-  if (idx === 0) card.classList.add("top-1st");
+  top3.forEach((video, idx) => {
+    const card = document.createElement("div");
+    card.className = "result-card";
+    if (idx === 0) card.classList.add("top-1st");
 
-  const img = document.createElement("img");
-  img.src = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
-  img.alt = video.name;
+    const img = document.createElement("img");
+    img.src = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+    img.alt = video.name;
 
-  const text = document.createElement("p");
-  text.innerHTML = `<strong>${idx + 1}위.</strong> ${video.name}`;
+    const text = document.createElement("p");
+    text.innerHTML = `<strong>${idx + 1}위.</strong> ${video.name}`;
 
-  card.appendChild(img);
-  card.appendChild(text);
-  topList.appendChild(card);
-});
+    card.appendChild(img);
+    card.appendChild(text);
+    topList.appendChild(card);
+  });
+}  
 
 document.getElementById("shareBtn").onclick = () => {
   const firstPlace = round[0].name;
@@ -207,7 +206,7 @@ document.getElementById("saveImageBtn").onclick = () => {
   html2canvas(resultSection, {
     useCORS: true,
     allowTaint: false,
-    backgroundColor: null // 투명 배경도 가능
+    backgroundColor: null
   }).then(canvas => {
     const link = document.createElement("a");
     link.download = 'verivery_ranking.png';
