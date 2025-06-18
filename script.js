@@ -1,4 +1,3 @@
-// You should insert your full 'videos' array here
 const videos = [
   { name: "Super Special", id: "D1hWFlHRRas" },
   { name: "불러줘", id: "Hbtiel8ycYI" },
@@ -168,7 +167,6 @@ function showFinalResults() {
     }
     if (topRest.length === 2) break;
   }
-
   const top3 = [top1, ...topRest];
 
   top3.forEach((video, idx) => {
@@ -187,7 +185,9 @@ function showFinalResults() {
     card.appendChild(text);
     topList.appendChild(card);
   });
-}  
+}
+
+renderMatch();
 
 document.getElementById("shareBtn").onclick = () => {
   const firstPlace = round[0].name;
@@ -215,4 +215,3 @@ document.getElementById("saveImageBtn").onclick = () => {
   });
 };
 
-renderMatch();
