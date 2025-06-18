@@ -157,23 +157,25 @@ function showFinalResults() {
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
 
-  const top1 = round[0];
+  // ✅ 최종 1위는 마지막 round의 첫 번째
+  const winner = round[0];
 
-  // ⬇️ rankings 뒤에서부터 순회
+  // ✅ 전체 순위 계산 (1위 + 뒤이어 탈락한 순서)
+  const allRanked = [winner, ...rankings];
+
+  // ✅ 중복 제거 (같은 id 여러 번 있을 수 있음)
   const seen = new Set();
-  const topRest = [];
-  for (let i = rankings.length - 1; i >= 0; i--) {
-    const v = rankings[i];
-    if (!seen.has(v.id) && v.id !== top1.id) {
+  const finalRankings = [];
+  for (const v of allRanked) {
+    if (!seen.has(v.id)) {
       seen.add(v.id);
-      topRest.push(v);
+      finalRankings.push(v);
     }
-    if (topRest.length === 2) break;
+    if (finalRankings.length === 3) break; // 1~3위까지만 표시
   }
 
-  const top3 = [top1, ...topRest];
-
-  top3.forEach((video, idx) => {
+  // ✅ 결과 카드 출력
+  finalRankings.forEach((video, idx) => {
     const card = document.createElement("div");
     card.className = "result-card";
     if (idx === 0) card.classList.add("top-1st");
@@ -190,6 +192,7 @@ function showFinalResults() {
     topList.appendChild(card);
   });
 }
+
 
 renderMatch();
 
