@@ -156,20 +156,22 @@ function showFinalResults() {
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
 
-  const first = round[0]; // 결승 승자 = 1위
-  const uniqueRankings = [];
+  const first = round[0];         // 결승 승자
+  const second = rankings.at(-1); // 결승 패자 (항상 마지막에 push됨)
 
-  const seen = new Set([first.id]); // 1위는 중복 제거
+  // 준결승에서 탈락한 두 곡 찾기
+  const semifinalLosers = rankings.slice(-3, -1); // 마지막 두 경기 중 결승 전 경기 패자들
 
-  for (const video of rankings) {
-    if (!seen.has(video.id)) {
-      uniqueRankings.push(video);
-      seen.add(video.id);
+  // 결승 진출자 2명을 제외한 준결승 탈락자 중 하나를 3위로
+  let third = null;
+  for (const video of semifinalLosers) {
+    if (video.id !== second.id) { // 결승 패자 제외
+      third = video;
+      break;
     }
-    if (uniqueRankings.length === 2) break; // 2위, 3위만 추출
   }
 
-  const top3 = [first, ...uniqueRankings]; // 정확한 1~3위
+  const top3 = [first, second, third];
 
   top3.forEach((video, idx) => {
     const card = document.createElement("div");
