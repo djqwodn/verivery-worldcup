@@ -157,19 +157,20 @@ function showFinalResults() {
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
 
-  // 1위는 최종 라운드에서 이긴 곡
   const top1 = round[0];
 
-  // rankings 배열은 탈락한 순서대로 쌓이므로, 역순으로 뒤집고 중복 제거
+  // rankings 역순 정렬 후 중복 제거하여 상위 2개 추출
   const seen = new Set();
-  const ordered = [...rankings].reverse().filter(v => {
-    if (seen.has(v.id) || v.id === top1.id) return false;
-    seen.add(v.id);
-    return true;
-  });
+  const topRest = [];
+  for (const v of [...rankings].reverse()) {
+    if (!seen.has(v.id) && v.id !== top1.id) {
+      seen.add(v.id);
+      topRest.push(v);
+    }
+    if (topRest.length === 2) break;
+  }
 
-  // 1~3위 배열 구성
-  const top3 = [top1, ...ordered.slice(0, 2)];
+  const top3 = [top1, ...topRest];
 
   top3.forEach((video, idx) => {
     const card = document.createElement("div");
@@ -188,6 +189,7 @@ function showFinalResults() {
     topList.appendChild(card);
   });
 }
+
 
 renderMatch();
 
