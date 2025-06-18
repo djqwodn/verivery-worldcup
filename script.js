@@ -159,10 +159,11 @@ function showFinalResults() {
 
   const top1 = round[0];
 
-  // rankings 배열에서 중복 제거하고 상위 2개만 가져오기 (순서 유지)
+  // ⬇️ rankings 뒤에서부터 순회
   const seen = new Set();
   const topRest = [];
-  for (const v of rankings) {
+  for (let i = rankings.length - 1; i >= 0; i--) {
+    const v = rankings[i];
     if (!seen.has(v.id) && v.id !== top1.id) {
       seen.add(v.id);
       topRest.push(v);
