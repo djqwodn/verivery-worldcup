@@ -1,3 +1,4 @@
+// You should insert your full 'videos' array here
 const videos = [
   { name: "Super Special", id: "D1hWFlHRRas" },
   { name: "불러줘", id: "Hbtiel8ycYI" },
@@ -158,16 +159,20 @@ function showFinalResults() {
   topList.innerHTML = "";
 
   const top1 = round[0];
+
+  const filteredRankings = rankings.filter(video => video.id !== top1.id);
+
   const seen = new Set();
-  const topRest = [];
-  for (const v of rankings) {
-    if (!seen.has(v.id) && v.id !== top1.id) {
+  const unique = [];
+  for (const v of filteredRankings) {
+    if (!seen.has(v.id)) {
       seen.add(v.id);
-      topRest.push(v);
+      unique.push(v);
     }
-    if (topRest.length === 2) break;
+    if (unique.length >= 2) break;
   }
-  const top3 = [top1, ...topRest];
+
+  const top3 = [top1, ...unique];
 
   top3.forEach((video, idx) => {
     const card = document.createElement("div");
@@ -187,8 +192,6 @@ function showFinalResults() {
   });
 }
 
-renderMatch();
-
 document.getElementById("shareBtn").onclick = () => {
   const firstPlace = round[0].name;
   const shareUrl = "https://djqwodn.github.io/verivery-worldcup/";
@@ -206,7 +209,7 @@ document.getElementById("saveImageBtn").onclick = () => {
   html2canvas(resultSection, {
     useCORS: true,
     allowTaint: false,
-    backgroundColor: null
+    backgroundColor: "#ffffff"
   }).then(canvas => {
     const link = document.createElement("a");
     link.download = 'verivery_ranking.png';
@@ -214,3 +217,6 @@ document.getElementById("saveImageBtn").onclick = () => {
     link.click();
   });
 };
+
+renderMatch();
+
