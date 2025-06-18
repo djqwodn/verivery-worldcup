@@ -1,57 +1,4 @@
-// You should insert your full 'videos' array here
-const videos = [
-  { name: "Super Special", id: "D1hWFlHRRas" },
-  { name: "불러줘", id: "Hbtiel8ycYI" },
-  { name: "Flower", id: "KwzGrOfR050" },
-  { name: "F.I.L", id: "MfboEq37eMI" },
-  { name: "Alright!", id: "jesASMPbDPc" },
-  { name: "딱 잘라서 말해", id: "y4mhiwdBMI4" },
-  { name: "Love Line", id: "7jEBrttKfus" },
-  { name: "나 집에 가지 않을래", id: "TrLWajzucRk" },
-  { name: "Get Ready", id: "GqhT2HbjE14" },
-  { name: "밝혀줘", id: "H9KAYTPomJ4" },
-  { name: "Tag Tag Tag", id: "yfhnTHWtBxE" },
-  { name: "반할 수밖에", id: "hlt9nZyIfI0" },
-  { name: "PHOTO", id: "adoPEIwIxbo" },
-  { name: "Lay Back", id: "X2RyGcufXKw" },
-  { name: "Paradise", id: "GbcH9zkQQfs" },
-  { name: "Curtain Call", id: "8tiMdcm2ziU" },
-  { name: "MOMENT", id: "9vzKcyUdXG4" },
-  { name: "Thunder", id: "aYStt6LoA9c" },
-  { name: "Connect", id: "cTPNkUAIlGs" },
-  { name: "Skydive", id: "XrqCjgSVR1I" },
-  { name: "Beautiful-x", id: "a1XX0U05R-0" },
-  { name: "사생활", id: "UVav7sAYz_g" },
-  { name: "G.B.T.B.", id: "iDfFtJcj5x4" },
-  { name: "MY FACE", id: "7UA4uI01FkE" },
-  { name: "Hold me tight", id: "r8M21DnjGJU" },
-  { name: "Get Outta My Way", id: "kW2HEDxyJT8" },
-  { name: "소중력", id: "MMkDWOaCLZI" },
-  { name: "Get Away", id: "SPghmad0OxM" },
-  { name: "Numbness", id: "UD-pW4eQfHM" },
-  { name: "TRIGGER", id: "71gOeMzNEBQ" },
-  { name: "Underdog", id: "UX7UpzRbvVM" },
-  { name: "Prom", id: "PEv8hC1cJGE" },
-  { name: "Heart Attack", id: "UcdGeLd0GRY" },
-  { name: "틈 (Moment)", id: "MVozmWZC7iU" },
-  { name: "UNDERCOVER", id: "UNUCV_UomZo" },
-  { name: "Coming over", id: "6nfXCX3mDUc" },
-  { name: "Wish U were here", id: "k4EHKjEizJ8" },
-  { name: "모든 순간들의 널 축하해 (Candle)", id: "jugKxJdnz2o" },
-  { name: "O", id: "EUMeWvOugVY" },
-  { name: "Fallin'", id: "21CQF3hBUHc" },
-  { name: "Childhood", id: "FJc_BbqE8b0" },
-  { name: "Emotion", id: "U6yHrtTI9Lw" },
-  { name: "Velocity", id: "Dol-QQKgtSM" },
-  { name: "잠깐, 봄 (Our Spring)", id: "3VmifoxGMMM" },
-  { name: "Fine", id: "1af_ioaauyQ" },
-  { name: "Tap Tap", id: "bmy6D1KoFsg" },
-  { name: "Motive", id: "lZ50_tXZRYk" },
-  { name: "CRAYZ LIKE THAT", id: "c46Psa0YiuA" },
-  { name: "JUICY JUICY", id: "CiKkabaviSc" },
-  { name: "RAIN COAT", id: "j0VSvwgUdws" },
-  { name: "SMILE WITH WOU", id: "RMV775MSd3c" }
-];
+const videos = [ /* 전체 51곡 배열 생략 없이 여기에 삽입하세요 */ ];
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -95,14 +42,13 @@ function createThumbnail(video, onClick) {
   playBtn.textContent = "▶ 선택";
   playBtn.onclick = onClick;
 
-  wrapper.appendChild(thumbnail);
-  wrapper.appendChild(title);
-
   const controls = document.createElement("div");
   controls.className = "controls-wrap";
   controls.appendChild(link);
   controls.appendChild(playBtn);
 
+  wrapper.appendChild(thumbnail);
+  wrapper.appendChild(title);
   wrapper.appendChild(controls);
 
   return wrapper;
@@ -158,21 +104,20 @@ function showFinalResults() {
   const topList = topResults.querySelector(".top-list");
   topList.innerHTML = "";
 
-  const top1 = round[0];
+  const first = round[0]; // 결승 승자 = 1위
+  const uniqueRankings = [];
 
-  const filteredRankings = rankings.filter(video => video.id !== top1.id);
+  const seen = new Set([first.id]); // 1위는 중복 제거
 
-  const seen = new Set();
-  const unique = [];
-  for (const v of filteredRankings) {
-    if (!seen.has(v.id)) {
-      seen.add(v.id);
-      unique.push(v);
+  for (const video of rankings) {
+    if (!seen.has(video.id)) {
+      uniqueRankings.push(video);
+      seen.add(video.id);
     }
-    if (unique.length >= 2) break;
+    if (uniqueRankings.length === 2) break; // 2위, 3위만 추출
   }
 
-  const top3 = [top1, ...unique];
+  const top3 = [first, ...uniqueRankings]; // 정확한 1~3위
 
   top3.forEach((video, idx) => {
     const card = document.createElement("div");
@@ -207,9 +152,9 @@ document.getElementById("shareBtn").onclick = () => {
 document.getElementById("saveImageBtn").onclick = () => {
   const resultSection = document.getElementById("results");
   html2canvas(resultSection, {
+    backgroundColor: "#ffffff", // 흰색 배경 설정
     useCORS: true,
     allowTaint: false,
-    backgroundColor: "#ffffff"
   }).then(canvas => {
     const link = document.createElement("a");
     link.download = 'verivery_ranking.png';
@@ -219,4 +164,3 @@ document.getElementById("saveImageBtn").onclick = () => {
 };
 
 renderMatch();
-
